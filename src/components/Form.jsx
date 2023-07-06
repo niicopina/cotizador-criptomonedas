@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 import styled from '@emotion/styled'
 import useSelectCoins from '../hooks/useSelectCoins'
 import { coins } from '../data/coins'
@@ -22,8 +22,16 @@ const InputSubmit = styled.input`
 `
 const Form = () => {
 
-    const [SelectCoins] = useSelectCoins('Elige la moneda', coins)
-    
+    const [coin, SelectCoins] = useSelectCoins('Elige la moneda', coins)
+    useEffect(()=>{
+        const consultAPI = async () => {
+            const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=40&tsym=USD'
+            const response = await fetch(url)
+            const result = await response.json()
+            console.log(result.Data)
+        }
+        consultAPI()
+    },[])
     return (
         <form>
             <SelectCoins />
