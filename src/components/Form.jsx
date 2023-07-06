@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import useSelectCoins from '../hooks/useSelectCoins'
+import { coins } from '../data/coins'
 
 const InputSubmit = styled.input`
     background-color: #9497FF;
@@ -12,6 +13,7 @@ const InputSubmit = styled.input`
     text-transform: uppercase;
     font-size: 20px;
     border-radius: 5px;
+    margin-top: 30px;
     transition: background-color .3s ease;
     &:hover{
         background-color: #7A7BFE;
@@ -20,10 +22,11 @@ const InputSubmit = styled.input`
 `
 const Form = () => {
 
-    const [SelectCoins] = useSelectCoins()
-    SelectCoins()
+    const [SelectCoins] = useSelectCoins('Elige la moneda', coins)
+    
     return (
         <form>
+            <SelectCoins />
             <InputSubmit 
                 type='submit' 
                 value="Cotizar" 
